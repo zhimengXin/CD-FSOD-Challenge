@@ -16,6 +16,36 @@ Here, we utilize the Qwen VL model to expand our target datasets, as illustrated
 
 <div align="center"><img src="DA.png" width="800"></div>
 
+
+**Prepare Data**
+* Data Preparation
+ 
+  - Unzip the downloaded data-source to `datasets` and put it into your project directory:
+    ```angular2html
+      ...
+      datasets
+        | -- dataset1 
+          | -- train
+          | -- train_aug
+          | -- test
+          | -- annotations
+          | -- train_aug_annotation
+        | -- dataset2
+          | -- train
+          | -- train_aug
+          | -- test
+          | -- annotations
+          | -- train_aug_annotation
+        | -- dataset3
+          | -- train
+          | -- train_aug
+          | -- test
+          | -- annotations
+          | -- train_aug_annotation
+      tools
+      ...
+    ```
+
 ### The generated images, along with the pseudo labels and the original target data, are combined to train our model effectively.
 
 Also, The pre-trained stage on COCO is directly taken from the [CD-ViTO]([https://github.com/mlzxy/devit](https://github.com/lovelyqian/CDFSOD-benchmark)), thus in practice, only the targets are needed to run our experiments.  
