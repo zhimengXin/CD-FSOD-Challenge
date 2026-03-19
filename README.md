@@ -67,8 +67,7 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-## Run 
-1. Download weights:
+## Download weights: 
 - download pretrained model from [DE-ViT](https://github.com/mlzxy/devit/blob/main/Downloads.md).
 
 - You could also download pretrained model from [Baidu Netdisk](https://pan.baidu.com/s/1ucod5uGGvbZQEtC3PbgevA?pwd=nvtx). And you need to construct the weights like devit.
@@ -79,19 +78,15 @@ pip install -e .
   ```
   (This process follows [DE-ViT](https://github.com/mlzxy/devit/blob/main/Downloads.md)(custom dataset))
   
+## Run Our model
+- Add --controller to main_results.sh, then
+```
+bash main_results.sh
+```
 - If you are using dataset2, please run:
    ```
    bash pseudo_loop.sh
    ```
-
-
-
-## Run Our model
-Add --controller to main_results.sh, then
-```
-bash main_results.sh
-```
-
 
 ## Evaluated Our model
 Our trained model can be found in this [Link](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
