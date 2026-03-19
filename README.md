@@ -22,7 +22,7 @@ Also, The pre-trained stage on COCO is directly taken from the [CD-ViTO]([https:
 
 The target datasets could be easily downloaded in the following links:  (If you use the datasets, please cite them properly, thanks.)
 
-- [Data augmentation datasets Link from 百度云盘](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
+- [Data augmentation datasets Link](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
 
 # Methods
 ## Setup
@@ -59,6 +59,8 @@ Add --controller to main_results.sh, then
 ```
 bash main_results.sh
 ```
+
+Our trained model can be found in this [Link](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
 
 # Citation
 If you find our paper or this code useful for your research, please considering cite us (●°u°●)」:
