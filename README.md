@@ -73,15 +73,10 @@ pip install -e .
 
 - You could also download pretrained model from [Baidu Netdisk](https://pan.baidu.com/s/1ucod5uGGvbZQEtC3PbgevA?pwd=nvtx). And you need to construct the weights like devit.
 
-2. Prototypes generated: 
-```
-bash build_prototypes.sh
-```
+- Prototypes generated: bash build_prototypes.sh (This process follows [DE-ViT](https://github.com/mlzxy/devit/blob/main/Downloads.md)(custom dataset))
+  
+- If you are using dataset2, please run: bash pseudo_loop.sh
 
-3. If you are using dataset2, please run: 
-```
-bash pseudo_loop.sh
-```
 
 
 ## Run Our model
