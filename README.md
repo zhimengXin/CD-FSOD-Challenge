@@ -29,19 +29,19 @@ Here, we utilize the Qwen VL model to expand our target datasets, as illustrated
           | -- train_aug
           | -- test
           | -- annotations
-          | -- train_aug_annotation
+          | -- aug_annotation
         | -- dataset2
           | -- train
           | -- train_aug
           | -- test
           | -- annotations
-          | -- train_aug_annotation
+          | -- aug_annotation
         | -- dataset3
           | -- train
           | -- train_aug
           | -- test
           | -- annotations
-          | -- train_aug_annotation
+          | -- aug_annotation
       tools
       ...
     ```
