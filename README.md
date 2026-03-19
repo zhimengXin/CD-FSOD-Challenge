@@ -83,10 +83,10 @@ pip install -e .
 ```
 bash main_results.sh
 ```
-- If you are using dataset2, please run:
-   ```
-   bash pseudo_loop.sh
-   ```
+- If you are using dataset2, it is optional to run:
+```
+bash pseudo_loop.sh
+```
 
 ## Evaluated Our model
 Our trained model can be found in this [Link](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
