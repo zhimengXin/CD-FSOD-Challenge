@@ -41,7 +41,7 @@ pip install -e .
 1. Download weights:
 - download pretrained model from [DE-ViT](https://github.com/mlzxy/devit/blob/main/Downloads.md).
 
-- You could also download pretrained model from Baidu Netdisk: https://pan.baidu.com/s/1ucod5uGGvbZQEtC3PbgevA?pwd=nvtx 提取码: nvtx. And you need to construct the weights like devit.
+- You could also download pretrained model from [Baidu Netdisk](https://pan.baidu.com/s/1ucod5uGGvbZQEtC3PbgevA?pwd=nvtx). And you need to construct the weights like devit.
 
 2. Prototypes generated: 
 ```
