@@ -25,12 +25,12 @@ To train Data Augmentation datasets on a custom dataset, please refer to [DATASE
 An anaconda environment is suggested, take the name "cdfsod" as an example: 
 
 ```
-git clone git@github.com:lovelyqian/CDFSOD-benchmark.git
+git clone git@github.com:zhimengXin/CD-FSOD-Challenge.git
+cd CD-FSOD-Challenge
 conda create -n cdfsod python=3.9
 conda activate cdfsod
-pip install -r CDFSOD-benchmark/requirements.txt 
-pip install -e ./CDFSOD-benchmark
-cd CDFSOD-benchmark
+pip install -r requirements.txt 
+pip install -e .
 ```
 
 ## Run 
