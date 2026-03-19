@@ -4,7 +4,7 @@
 
 
 
-<div align="center"><img src="Framework.png" width="800"></div>
+<div align="center"><img src="method.png" width="800"></div>
 
 
 # Datasets
