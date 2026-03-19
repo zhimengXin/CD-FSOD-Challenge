@@ -92,10 +92,17 @@ Add --controller to main_results.sh, then
 bash main_results.sh
 ```
 
+
+## Evaluated Our model
 Our trained model can be found in this [Link](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
+```
+bash evaluation.sh
+```
+
+
 
 # Citation
-If you find our paper or this code useful for your research, please considering cite us (●°u°●)」:
+If you find our code and generated images and labels useful for your research, please considering cite us (●°u°●)」:
 ```
 ```
   
