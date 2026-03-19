@@ -7,85 +7,51 @@
 <div align="center"><img src="framework.png" width="800"></div>
 
 
-## Quick Start
+# Datasets
+We take **COCO** as source training data and **ArTaxOr**, **Clipart1k**, **DIOR**, **DeepFish**, **NEU-DET**, and **UODD** as targets. 
 
-**1. Check Requirements**
-* Linux with Python >= 3.10
-* [PyTorch](https://pytorch.org/get-started/locally/) >= 2.1.1 & [torchvision](https://github.com/pytorch/vision/) that matches the PyTorch version.
-* CUDA 11.7 11.8
+![image](https://github.com/user-attachments/assets/532dc8db-47eb-4e84-be46-7a59f8ff0461)
 
 
-**2. Build SCSM**
+Also, as stated in the paper, we adopt the "pretrain, finetuning, and testing" pipeline, while the pre-trained stage on COCO is directly taken from the [DE-ViT](https://github.com/mlzxy/devit), thus in practice, only the targets are needed to run our experiments.  
 
-* Install PyTorch 2.1.1 with CUDA 11.8 
-  ```shell
-  conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=11.8 -c pytorch -c nvidia
-  ```
-* Install Detectron2==0.6
- 
-  - If you use other version of PyTorch/CUDA, check the latest version of Detectron2 in this page: [Detectron2](https://github.com/facebookresearch/detectron2/releases). 
- 
-* Install other requirements. 
-  ```angular2html
-  pip install -r requirements.txt
-  ```
+The target datasets could be easily downloaded in the following links:  (If you use the datasets, please cite them properly, thanks.)
 
-**3. Prepare Data**
-* Data Preparation
- 
-  - Unzip the downloaded data-source to `datasets` and put it into your project directory:
-    ```angular2html
-      ...
-      datasets
-        | -- coco (trainval2014/*.jpg, val2014/*.jpg, annotations/*.json)
-        | -- cocosplit
-        | -- VOC2007
-        | -- VOC2012
-        | -- vocsplit
-      scsm
-      tools
-      ...
-    ```
+- [Dataset Link from Google Drive](https://drive.google.com/drive/folders/16SDv_V7RDjTKDk8uodL2ubyubYTMdd5q?usp=drive_link)
+- [Dataset Link from 百度云盘](https://pan.baidu.com/s/1MpTwmJQF6GtmnxauVUPNAw?pwd=ni5j)
 
-**4. Training and Evaluation**
+To train CD-ViTO on a custom dataset, please refer to [DATASETS.md](https://github.com/lovelyqian/CDFSOD-benchmark/blob/main/DATASETS.md) for detailed instructions.
 
-* Fist run voc base.
-  ```angular2html
-  bash run_voc_base.sh    
-  ```
+# Methods
+## Setup
+An anaconda environment is suggested, take the name "cdfsod" as an example: 
 
-* pre-trained base model prepare.
-  ```angular2html
-   python tools/model_surgery.py --dataset voc --method randinit                         \
-     --src-path ${SAVE_DIR}/voc_base/model_final.pth                      \
-     --save-dir ${SAVE_DIR}/voc_base
-  ```
+```
+git clone git@github.com:lovelyqian/CDFSOD-benchmark.git
+conda create -n cdfsod python=3.9
+conda activate cdfsod
+pip install -r CDFSOD-benchmark/requirements.txt 
+pip install -e ./CDFSOD-benchmark
+cd CDFSOD-benchmark
+```
+
+## Run CD-ViTO
+1. download weights:
+- download pretrained model from [DE-ViT](https://github.com/mlzxy/devit/blob/main/Downloads.md).
+
+- You could also download pretrained model from Baidu Netdisk: https://pan.baidu.com/s/1ucod5uGGvbZQEtC3PbgevA?pwd=nvtx 提取码: nvtx. And you need to construct the weights like devit.
+
+2. run script: 
+```
+bash main_results.sh
+```
 
 
-* Then run voc novel.
-  ```angular2html
-  bash run_voc_novel.sh    # ATTACK represents AFT.
-  ```
-
-
-
-* Fist run coco base.
-  ```angular2html
-  bash run_coco_base.sh
-  ```
-
-* pre-trained base model prepare.
-  ```angular2html
-   python tools/model_surgery.py --dataset voc --method remove                         \
-     --src-path ${SAVE_DIR}/coco_base/model_final.pth                      \
-     --save-dir ${SAVE_DIR}/coco_base
-  ```
-
-
-* Then run coco novel.
-  ```angular2html
-  bash run_coco_novel.sh  # ATTACK represents AFT.
-  ```
+## Run DE-ViT-FT
+Add --controller to main_results.sh, then
+```
+bash main_results.sh
+```
   
 
 
