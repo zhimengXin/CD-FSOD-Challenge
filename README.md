@@ -16,7 +16,7 @@ Also, as stated in the paper, we adopt the "pretrain, finetuning, and testing" p
 The target datasets could be easily downloaded in the following links:  (If you use the datasets, please cite them properly, thanks.)
 
 
-- [Data augmentation datasets Link from 百度云盘](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ib)
+- [Data augmentation datasets Link from 百度云盘](https://pan.baidu.com/s/1EcE5vMqr7Kp1Bp2lYztxmA?pwd=2ibp)
 
 To train Data Augmentation datasets on a custom dataset, please refer to [DATASETS.md](https://github.com/lovelyqian/CDFSOD-benchmark/blob/main/DATASETS.md) for detailed instructions.
 
