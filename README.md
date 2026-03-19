@@ -1,196 +1,103 @@
-# NTIRE2026_CDFSOD
-NTIRE 2026 Challenge on **2-nd Cross-Domain Few-Shot Object Detection @ CVPR 2026** 🔥🔥
 
-Link: [https://www.codabench.org/competitions/12873/](https://www.codabench.org/competitions/12873/)
 
-[**News!**] 26-01-20: Training and Validation datasets released📖
-
-[**News!**] 26-03-09: We release the [testing datasets](https://drive.google.com/drive/folders/19Ylfklp2TW_HijR2ZrVt-ayMNQfo__T2?usp=sharing)! 
+## NTIRE 2026 CD-FSOD Challenge Factsheet AIPR: Data augmentation and Iterative Pseudo-labeling with Prototype Refinement for Cross-Domain Few-Shot Object Detection
 
 
 
-**Links to the proposed solutions in the 1-st Challenge:** 🏆
-- Winners of open-source CD-FSOD:
-    - Team MoveFree: https://github.com/KAIJINZ228/Few_Shot_GD
-    - Team AI4EarthLab: https://github.com/jaychempan/ETS
-    - Team IDCFS: https://github.com/Pumpkinder/GLIP-CDFSOD
+<div align="center"><img src="framework.png" width="800"></div>
 
-- Winners of closed-source CD-FSOD:
-    - Team X-Few: https://github.com/johnmaijer/X-Few-_CD-FSOD
 
-- Others:
-    - Team FDUROILab_Lenovo: https://github.com/omnipotent13/cfsod_challenge
-    - Team RLG: https://github.com/lch216/cdfsod-project
-    - Team TongjiLab: https://github.com/Sun-HR02/ProtoDINO/tree/main
-    - Team HUSTLab: https://github.com/Weston111/cdfsod
-    - Team FSV: https://github.com/yuqing-yang/CDFSOD-FSV
-    - Team IPC: https://github.com/Linzeyin/NTIRE2025_CDFSOD_tta
+## Quick Start
 
-## About the Challenge
-In this challenge, we invite researchers and developers to participate in the **Cross-Domain Few-Shot Object Detection (CD-FSOD)** competition. The task is to develop and improve methods for few-shot object detection, specifically in cross-domain settings.
+**1. Check Requirements**
+* Linux with Python >= 3.10
+* [PyTorch](https://pytorch.org/get-started/locally/) >= 2.1.1 & [torchvision](https://github.com/pytorch/vision/) that matches the PyTorch version.
+* CUDA 11.7 11.8
 
-![benchmark](./image/benchmark.png)
 
-Participants will test their models on a set of target datasets and aim to achieve the best performance in terms of **Mean Average Precision (mAP)** on different domains. The main objective is to push the boundaries of object detection methods in cross-domain scenarios, using very few labeled target images.
+**2. Build SCSM**
 
-This challenge does not impose restrictions on **source data selection** (e.g., COCO) or pretrained models, allowing participants to leverage diverse knowledge sources to improve performance on the target domain. We will provide multiple novel datasets for validation, while the final evaluation will be conducted on previously unseen test sets. The **mAP** will be used as the ranking metric.
+* Install PyTorch 2.1.1 with CUDA 11.8 
+  ```shell
+  conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=11.8 -c pytorch -c nvidia
+  ```
+* Install Detectron2==0.6
+ 
+  - If you use other version of PyTorch/CUDA, check the latest version of Detectron2 in this page: [Detectron2](https://github.com/facebookresearch/detectron2/releases). 
+ 
+* Install other requirements. 
+  ```angular2html
+  pip install -r requirements.txt
+  ```
 
-We will also provide several strong baseline models, while strongly encouraging participants to explore innovative solutions that improve detection accuracy on the target domain while effectively leveraging knowledge from the source domain. This challenge offers a unique opportunity for researchers and practitioners from academia and industry to push the boundaries of cross-domain few-shot object detection.
+**3. Prepare Data**
+* Data Preparation
+ 
+  - Unzip the downloaded data-source to `datasets` and put it into your project directory:
+    ```angular2html
+      ...
+      datasets
+        | -- coco (trainval2014/*.jpg, val2014/*.jpg, annotations/*.json)
+        | -- cocosplit
+        | -- VOC2007
+        | -- VOC2012
+        | -- vocsplit
+      scsm
+      tools
+      ...
+    ```
 
-## The Environments
-The evaluation environments we adopted are recorded in the following section. Below are the system requirements and setup instructions for reproducing the evaluation environment.
+**4. Training and Evaluation**
 
-### Required Environment Setup
-We suggest using Anaconda for environment management. Here's how to set up the environment for the challenge:
+* Fist run voc base.
+  ```angular2html
+  bash run_voc_base.sh    
+  ```
 
-- **Step 1**: conda environment create:
-  ```bash
-    conda create -n cdfsod python=3.9
-    conda activate cdfsod
-- **Step 2**: install other libs:
-  ```bash
-    cd NTIRE2026_CDFSOD
-    pip install -r requirements.txt
-    pip install -e ./
-or take it as a reference based on your original environments.
+* pre-trained base model prepare.
+  ```angular2html
+   python tools/model_surgery.py --dataset voc --method randinit                         \
+     --src-path ${SAVE_DIR}/voc_base/model_final.pth                      \
+     --save-dir ${SAVE_DIR}/voc_base
+  ```
 
-## The Validation Datasets
-We take COCO as source data and ArTaxOr, Clipart1k, and DeepFish as validation datasets.
 
-The target datasets could be easily downloaded in the following links: 
-- [Dataset and Weights Link from Google Drive](https://drive.google.com/drive/folders/16SDv_V7RDjTKDk8uodL2ubyubYTMdd5q?usp=drive_link)
+* Then run voc novel.
+  ```angular2html
+  bash run_voc_novel.sh    # ATTACK represents AFT.
+  ```
 
-## The Test Datasets
-03-09: we just released the datasets for testing!
 
-**The testing datasets could be easily downloaded in the following links:**
-- **[Testing Dataset Link from Google Drive](https://drive.google.com/drive/folders/19Ylfklp2TW_HijR2ZrVt-ayMNQfo__T2?usp=sharing)**
 
-After downloading all the necessary validation datasets, make sure they are organized as follows:
+* Fist run coco base.
+  ```angular2html
+  bash run_coco_base.sh
+  ```
 
-```bash
-|NTIRE2026_CDFSOD/datasets/
-|--clipart1k/
-|   |--annotations
-|   |--test
-|   |--train
-|--ArTaxOr/
-|   |--annotations
-|   |--test
-|   |--train
-|--......
-```
-And the weights should be organized as follows:
-```bash
-|NTIRE2026_CDFSOD/weights/
-|--trained/
-|   |--vitl_0089999.pth
-|--background/
-|   |--background_prototypes.vitl14.pth
-```
+* pre-trained base model prepare.
+  ```angular2html
+   python tools/model_surgery.py --dataset voc --method remove                         \
+     --src-path ${SAVE_DIR}/coco_base/model_final.pth                      \
+     --save-dir ${SAVE_DIR}/coco_base
+  ```
 
-## Test the baseline model
-As the environment is ready, select a different baseline to test
 
-As a strong starting point, we recommend ETS (https://github.com/jaychempan/ETS), the award-winning open-sourced solution from 1-st Main track, which provides a solid and competitive baseline for participants to build upon. In addition, we suggest Domain-RAG (https://github.com/LiYu0524/Domain-RAG)**NeurIPS 25, Current SoTA**, a plug-and-play method that can be readily integrated into existing pipelines to enhance cross-domain adaptation and few-shot detection performance. For participants interested in high-performing solutions in the Closed Setting, we highlight X-Few (https://github.com/johnmaijer/X-Few-_CD-FSOD), the award-winning team solution from 1-st Closed Source track, offering valuable insights and strong empirical performance under the closed-set evaluation protocol.
+* Then run coco novel.
+  ```angular2html
+  bash run_coco_novel.sh  # ATTACK represents AFT.
+  ```
+  
 
-### Run CD-ViTO
-```
-bash main_results.sh
-```
-### Run DE-ViT-FT
-Add --controller to main_results.sh, then
-```
-bash main_results.sh
-```
 
-## Evaluation Criteria & Fairness
-To ensure fairness and meaningful benchmarking, participants must adhere to the following guidelines:
-- **Mean Average Precision (mAP)**: mAP will be the primary ranking metric.
-- **Platform**: The challenge will be hosted on [Codalab](https://codalab.lisn.upsaclay.fr/competitions/21851).
-- **Submission Format**: Predictions must be submitted in COCO-style JSON annotations.
-- **Training Restrictions**: Participants may use any publicly available pretrained models, and use the few-labeled supports (1shot/5shot/10shot) for finetuning the models.  However, manually search for more support images is strictly **forbidden**. 
-- **Statement**: Each submission must include a reproducibility statement, detailing the model’s training strategy and pretrained resources used.
 
-## Provided Resources
-- **CD-FSOD Benchmark**: A dataset with distinct source and target domains designed for evaluating cross-domain FSOD models.
-- **Baseline Models**: We will provide baseline implementations of DE-ViT and CD-ViTO, along with training scripts and benchmark results.
-- **Evaluation Server**: Participants will submit results to an online leaderboard for validation and testing.
 
-**The top-ranked participants will be awarded and invited to follow the CVPR submission guide for workshops to describe their solution and to submit to the associated NTIRE workshop at CVPR 2026.**
 
-## References
-please consider citing our baseline work and challenege technical report:
-```
-@inproceedings{fu2025cross,
-  title={Cross-domain few-shot object detection via enhanced open-set object detector},
-  author={Fu, Yuqian and Wang, Yu and Pan, Yixuan and Huai, Lian and Qiu, Xingyu and Shangguan, Zeyu and Liu, Tong and Fu, Yanwei and Van Gool, Luc and Jiang, Xingqun},
-  booktitle={European Conference on Computer Vision},
-  pages={247--264},
-  year={2025},
-  organization={Springer}
-}
 
-@inproceedings{qiu2026ntire, 
-  title={NTIRE 2026 challenge on cross-domain few-shot object detection: methods and results},
-  author={ Qiu, Xingyu and Fu, Yuqian and Jiawei, Geng and Ren, Bin and Jiancheng Pan and Fu, Yanwei and Timofte, Radu and others},
-  booktitle={CVPRW},
-  year={2026}
-}
-```
 
-and if you are looking for related works for cross-domain few-shot learning, please consider also: 
-```
-@article{li2025domain,
-  title={Domain-RAG: Retrieval-Guided Compositional Image Generation for Cross-Domain Few-Shot Object Detection},
-  author={Li, Yu and Qiu, Xingyu and Fu, Yuqian and Chen, Jie and Qian, Tianwen and Zheng, Xu and Paudel, Danda Pani and Fu, Yanwei and Huang, Xuanjing and Van Gool, Luc and others},
-  journal={arXiv preprint arXiv:2506.05872},
-  year={2025}
-}
 
-@inproceedings{fu2023styleadv,
-  title={Styleadv: Meta style adversarial training for cross-domain few-shot learning},
-  author={Fu, Yuqian and Xie, Yu and Fu, Yanwei and Jiang, Yu-Gang},
-  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
-  pages={24575--24584},
-  year={2023}
-}
 
-@inproceedings{fu2021meta,
-  title={Meta-fdmixup: Cross-domain few-shot learning guided by labeled target data},
-  author={Fu, Yuqian and Fu, Yanwei and Jiang, Yu-Gang},
-  booktitle={Proceedings of the 29th ACM international conference on multimedia},
-  pages={5326--5334},
-  year={2021}
-}
 
-```
-## Organizers
-For inquiries, please contact the challenge organizers: 
 
-Xingyu Qiu (xyqiu24@m.fudan.edu.cn)
 
-Yuqian Fu (yuqian.fu.ai@gmail.com)
 
-Jiawei Geng (jwgeng25@m.fudan.edu.cn)
 
-Bin Ren (bin.ren.mondo@gmail.com)
-
-Jiancheng Pan (jiancheng.pan.plus@gmail.com)
-
-Zongwei Wu (zongwei.wu@uni-wuerzburg.de)
-
-Hao Tang (howard.haotang@gmail.com)
-
-Yanwei Fu (yanweifu@fudan.edu.cn)
-
-Radu Timofte (radu.timofte@uni-wuerzburg.de)
-
-Nicu Sebe (niculae.sebe@unitn.it)
-
-Mohamed H. Elhoseiny (mohamed.elhoseiny@kaust.edu.sa)
-
-For more details about the NTIRE Workshop and challenge organizers, visit: [NTIRE 2026](https://cvlai.net/ntire/2026/).
-
-## Others
-For more details, e.g., the important dates, the submission, the final scoring method, please see our [codalab](https://codalab.lisn.upsaclay.fr/competitions/21851).
