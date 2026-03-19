@@ -51,6 +51,11 @@ Add --controller to main_results.sh, then
 ```
 bash main_results.sh
 ```
+
+# Citation
+If you find our paper or this code useful for your research, please considering cite us (●°u°●)」:
+```
+```
   
 
 
