@@ -10,6 +10,9 @@
 # Datasets
 We take **COCO** as source training data and **dataset1**, **dataset2**, **dataset3** as targets. 
 
+Here, we utilize the Qwen VL model to expand our dataset, as illustrated in the figure below.
+
+<div align="center"><img src="DA.png" width="800"></div>
 
 Also, as stated in the paper, we adopt the "pretrain, finetuning, and testing" pipeline, while the pre-trained stage on COCO is directly taken from the [CD-ViTO]([https://github.com/mlzxy/devit](https://github.com/lovelyqian/CDFSOD-benchmark)), thus in practice, only the targets are needed to run our experiments.  
 
