@@ -10,6 +10,8 @@
 # Datasets
 We take **COCO** as source training data and **dataset1**, **dataset2**, **dataset3** as targets. 
 
+Challenge datasets can be found in [NTIRE 2026 Cross-Domain Few-Shot Object Detection (CDFSOD) Challenge](https://www.codabench.org/competitions/12873/)
+
 Here, we utilize the Qwen VL model to expand our target datasets, as illustrated in the figure below.
 
 <div align="center"><img src="DA.png" width="800"></div>
